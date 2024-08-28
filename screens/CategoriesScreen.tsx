@@ -10,7 +10,9 @@ type Props = { navigation: MealCategoriesNavigationProp };
 const CategoriesScreen = ({ navigation }: Props) => {
   const getRenderItem = (item: Category) => {
     const onPressHanlder = () => {
-      navigation.navigate("Overview");
+      navigation.navigate("Overview", {
+        categoryId: item.id,
+      });
     };
     return (
       <CategoryItem

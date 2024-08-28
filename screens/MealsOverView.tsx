@@ -1,9 +1,25 @@
-import { StyleSheet, Text, View } from "react-native";
+import { FlatList, StyleSheet, Text, View } from "react-native";
+import { useRoute } from "@react-navigation/native";
+import { MEALS } from "../data/dummy-data";
+import MealItem from "../components/MealItem";
 
-const MealsOverView = () => {
+interface Props {
+  route?: { params: { categoryId: string } };
+}
+const MealsOverView = ({ route }: Props) => {
+  // const route = useRoute();
+  // console.log(route);
+  const categoryId = route?.params.categoryId ?? "";
+  // console.log(categoryId);
+
+  const meals = MEALS.filter((meal) => meal.categoryIds.includes(categoryId));
   return (
     <View>
-      <Text>Meals Overview</Text>
+      <FlatList
+        data={meals}
+        keyExtractor={(item) => item.id}
+        renderItem={(item) => <MealItem meal={item.item} />}
+      />
     </View>
   );
 };

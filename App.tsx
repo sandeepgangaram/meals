@@ -4,8 +4,9 @@ import CategoriesScreen from "./screens/CategoriesScreen";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import MealsOverView from "./screens/MealsOverView";
+import { RootStackNavigatorParamList } from "./utils/types";
 
-const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator<RootStackNavigatorParamList>();
 export default function App() {
   return (
     // <View style={styles.container}>

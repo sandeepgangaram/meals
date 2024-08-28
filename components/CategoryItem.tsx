@@ -1,4 +1,5 @@
 import { Pressable, StyleSheet, Text, View } from "react-native";
+// import { useNavigation } from "@react-navigation/native";
 
 interface Props {
   text: string;
@@ -6,6 +7,8 @@ interface Props {
   onPress: () => void;
 }
 const CategoryItem = ({ text, color, onPress }: Props) => {
+  // const navigation = useNavigation();
+  // navigation.navigate("Overview");
   const containerStyle = {
     backgroundColor: color,
     borderColor: color,
