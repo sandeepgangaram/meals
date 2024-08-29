@@ -5,6 +5,7 @@ export type RootStackNavigatorParamList = {
   Overview: {
     categoryId: string;
   };
+  MealDetail: undefined;
 };
 
 export type MealCategoriesNavigationProp = NativeStackNavigationProp<

@@ -27,7 +27,16 @@ const MealsOverView = ({ route, navigation }: Props) => {
       <FlatList
         data={meals}
         keyExtractor={(item) => item.id}
-        renderItem={(item) => <MealItem meal={item.item} />}
+        renderItem={(item) => (
+          <MealItem
+            meal={item.item}
+            onPress={() =>
+              navigation.navigate("MealDetail", {
+                mealId: item.item.id,
+              })
+            }
+          />
+        )}
       />
     </View>
   );

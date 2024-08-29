@@ -6,33 +6,32 @@ import {
   Pressable,
   Platform,
 } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import Meal from "../models/meal";
-import { InnerScreen } from "react-native-screens";
+import MealDetails from "./MealDetails";
 
 interface Props {
   meal: Meal;
+  onPress: () => void;
 }
-const MealItem = ({ meal }: Props) => {
+const MealItem = ({ meal, onPress }: Props) => {
   return (
     <View style={styles.container}>
       <Pressable
         android_ripple={{ color: "#ccc" }}
         style={({ pressed }) => pressed && styles.onPress}
+        onPress={onPress}
       >
         <View style={styles.innerContainer}>
           <View>
             <Image source={{ uri: meal.imageUrl }} style={styles.image} />
             <Text style={styles.title}>{meal.title}</Text>
           </View>
-          <View style={styles.details}>
-            <Text style={styles.detailText}>{meal.duration}m</Text>
-            <Text style={styles.detailText}>
-              {meal.complexity.toUpperCase()}
-            </Text>
-            <Text style={styles.detailText}>
-              {meal.affordability.toUpperCase()}
-            </Text>
-          </View>
+          <MealDetails
+            affordability={meal.affordability}
+            complexity={meal.complexity}
+            duration={meal.duration}
+          />
         </View>
       </Pressable>
     </View>
@@ -69,15 +68,5 @@ const styles = StyleSheet.create({
     fontSize: 18,
     textAlign: "center",
     margin: 8,
-  },
-  details: {
-    flexDirection: "row",
-    justifyContent: "center",
-    gap: 8,
-  },
-  detailText: {
-    fontSize: 12,
-    margin: 8,
-    marginTop: 0,
   },
 });
