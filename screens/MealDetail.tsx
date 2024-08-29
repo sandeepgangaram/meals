@@ -1,9 +1,17 @@
-import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
+import {
+  Button,
+  Image,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 import { MEALS } from "../data/dummy-data";
 import { useLayoutEffect } from "react";
 import MealDetails from "../components/MealDetails";
 import SubTitle from "../components/SubTitle";
 import List from "../components/List";
+import IconButton from "../components/IconButton";
 
 interface Props {
   route: any;
@@ -12,10 +20,21 @@ interface Props {
 const MealDetail = ({ route, navigation }: Props) => {
   const mealId = route?.params.mealId;
 
+  const tapHandler = () => {
+    navigation.navigate("Categories");
+  };
   const meal = MEALS.find((meal) => meal.id === mealId);
   useLayoutEffect(() => {
     navigation.setOptions({
       title: meal?.title,
+      headerRight: () => (
+        <IconButton
+          color="white"
+          icon={"home"}
+          onPress={tapHandler}
+          size={24}
+        />
+      ),
     });
   }, []);
 
