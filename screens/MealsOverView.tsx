@@ -2,6 +2,7 @@ import { FlatList, StyleSheet, View } from "react-native";
 import { CATEGORIES, MEALS } from "../data/dummy-data";
 import MealItem from "../components/MealItem";
 import { useLayoutEffect } from "react";
+import MealsList from "../components/MealsList";
 
 interface Props {
   route?: { params: { categoryId: string } };
@@ -22,24 +23,13 @@ const MealsOverView = ({ route, navigation }: Props) => {
     });
   }, []);
 
-  return (
-    <View>
-      <FlatList
-        data={meals}
-        keyExtractor={(item) => item.id}
-        renderItem={(item) => (
-          <MealItem
-            meal={item.item}
-            onPress={() =>
-              navigation.navigate("MealDetail", {
-                mealId: item.item.id,
-              })
-            }
-          />
-        )}
-      />
-    </View>
-  );
+  const onPressHanlder = (id: string) => {
+    navigation.navigate("MealDetail", {
+      mealId: id,
+    });
+  };
+
+  return <MealsList items={meals} onPress={onPressHanlder} />;
 };
 export default MealsOverView;
 

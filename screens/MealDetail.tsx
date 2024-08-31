@@ -7,22 +7,31 @@ import {
   View,
 } from "react-native";
 import { MEALS } from "../data/dummy-data";
-import { useLayoutEffect } from "react";
+import { useContext, useLayoutEffect } from "react";
 import MealDetails from "../components/MealDetails";
 import SubTitle from "../components/SubTitle";
 import List from "../components/List";
 import IconButton from "../components/IconButton";
+import { FavouritesContext } from "../store/context/favouritesContext";
 
 interface Props {
   route: any;
   navigation: any;
 }
 const MealDetail = ({ route, navigation }: Props) => {
+  const favouriteContext = useContext(FavouritesContext);
+
   const mealId = route?.params.mealId;
+  const isFavourite = favouriteContext.favouriteIds.includes(mealId);
 
   const tapHandler = () => {
-    navigation.navigate("Home");
+    if (isFavourite) {
+      favouriteContext.removeFavourite(mealId);
+    } else {
+      favouriteContext.addFavourite(mealId);
+    }
   };
+
   const meal = MEALS.find((meal) => meal.id === mealId);
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -30,13 +39,13 @@ const MealDetail = ({ route, navigation }: Props) => {
       headerRight: () => (
         <IconButton
           color="white"
-          icon={"home"}
+          icon={isFavourite ? "heart" : "heart-outline"}
           onPress={tapHandler}
           size={24}
         />
       ),
     });
-  }, []);
+  }, [isFavourite]);
 
   return (
     <ScrollView style={styles.root}>

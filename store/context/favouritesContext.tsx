@@ -1,23 +1,23 @@
-import { Children, createContext, useState } from "react";
+import { createContext, useState } from "react";
 
 interface ContextValue {
-  ids: string[];
+  favouriteIds: string[];
   addFavourite: (id: string) => void;
   removeFavourite: (id: string) => void;
 }
-const initialState: ContextValue = {
-  ids: [],
-  addFavourite: (id) => {},
-  removeFavourite: (id) => {},
-};
-export const FavouritesContext = createContext(initialState);
+
+export const FavouritesContext = createContext<ContextValue>({
+  favouriteIds: [],
+  addFavourite: (id: string) => {},
+  removeFavourite: (id: string) => {},
+});
 
 interface Props {
   children: React.ReactNode;
 }
 
 const FavouritesContextProvider = ({ children }: Props) => {
-  const [faouriteIds, setFavouriteIds] = useState<string[]>([]);
+  const [favouriteIds, setFavouriteIds] = useState<string[]>([]);
 
   const addFavourite = (id: string) => {
     setFavouriteIds((prev) => [...prev, id]);
@@ -28,7 +28,7 @@ const FavouritesContextProvider = ({ children }: Props) => {
   };
 
   const value: ContextValue = {
-    ids: faouriteIds,
+    favouriteIds,
     addFavourite,
     removeFavourite,
   };

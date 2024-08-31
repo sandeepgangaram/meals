@@ -1,4 +1,4 @@
-import { FlatList, Text } from "react-native";
+import { FlatList, Text, View } from "react-native";
 import { CATEGORIES } from "../data/dummy-data";
 import CategoryItem from "../components/CategoryItem";
 import Category from "../models/category";
@@ -23,12 +23,14 @@ const CategoriesScreen = ({ navigation }: Props) => {
     );
   };
   return (
-    <FlatList
-      data={CATEGORIES}
-      keyExtractor={(item) => item.id}
-      renderItem={(itemData) => getRenderItem(itemData.item)}
-      numColumns={2}
-    />
+    <View style={{ alignItems: "center" }}>
+      <FlatList
+        data={CATEGORIES}
+        keyExtractor={(item) => item.id}
+        renderItem={(itemData) => getRenderItem(itemData.item)}
+        numColumns={2}
+      />
+    </View>
   );
 };
 export default CategoriesScreen;
