@@ -9,49 +9,52 @@ import MealDetail from "./screens/MealDetail";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import FavouritesScreen from "./screens/FavouritesScreen";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import FavouritesContextProvider from "./store/context/favouritesContext";
 
 const Stack = createNativeStackNavigator<RootStackNavigatorParamList>();
 const Drawer = createDrawerNavigator();
 
 const DrawerNavigator = () => {
   return (
-    <Drawer.Navigator
-      screenOptions={{
-        headerTintColor: "white",
-        headerTitleAlign: "center",
-        headerStyle: {
-          backgroundColor: "brown",
-        },
-        sceneContainerStyle: {
-          backgroundColor: "#ffffff",
-        },
-        drawerContentStyle: {
-          backgroundColor: "brown",
-        },
-        drawerActiveTintColor: "black",
-        drawerInactiveTintColor: "white",
-        drawerActiveBackgroundColor: "#FFE4C4",
-      }}
-    >
-      <Drawer.Screen
-        name="Categories"
-        component={CategoriesScreen}
-        options={{
-          drawerIcon: ({ size, color }) => (
-            <MaterialIcons name="category" size={size} color={color} />
-          ),
+    <FavouritesContextProvider>
+      <Drawer.Navigator
+        screenOptions={{
+          headerTintColor: "white",
+          headerTitleAlign: "center",
+          headerStyle: {
+            backgroundColor: "brown",
+          },
+          sceneContainerStyle: {
+            backgroundColor: "#ffffff",
+          },
+          drawerContentStyle: {
+            backgroundColor: "brown",
+          },
+          drawerActiveTintColor: "black",
+          drawerInactiveTintColor: "white",
+          drawerActiveBackgroundColor: "#FFE4C4",
         }}
-      />
-      <Drawer.Screen
-        name="Favourites"
-        component={FavouritesScreen}
-        options={{
-          drawerIcon: ({ size, color }) => (
-            <MaterialIcons name="favorite" size={size} color={color} />
-          ),
-        }}
-      />
-    </Drawer.Navigator>
+      >
+        <Drawer.Screen
+          name="Categories"
+          component={CategoriesScreen}
+          options={{
+            drawerIcon: ({ size, color }) => (
+              <MaterialIcons name="category" size={size} color={color} />
+            ),
+          }}
+        />
+        <Drawer.Screen
+          name="Favourites"
+          component={FavouritesScreen}
+          options={{
+            drawerIcon: ({ size, color }) => (
+              <MaterialIcons name="favorite" size={size} color={color} />
+            ),
+          }}
+        />
+      </Drawer.Navigator>
+    </FavouritesContextProvider>
   );
 };
 export default function App() {
