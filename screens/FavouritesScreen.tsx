@@ -21,7 +21,7 @@ const FavouritesScreen = ({ navigation }: Props) => {
   if (meals.length === 0) {
     return (
       <View style={styles.container}>
-        <Text style={styles.text}>Nope. No Favourites.</Text>
+        <Text style={styles.text}>Nope. No favourites yet.</Text>
       </View>
     );
   }
@@ -38,5 +38,6 @@ const styles = StyleSheet.create({
   text: {
     fontWeight: "bold",
     fontSize: 16,
+    color: "brown",
   },
 });
