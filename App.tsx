@@ -6,8 +6,54 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import MealsOverView from "./screens/MealsOverView";
 import { RootStackNavigatorParamList } from "./utils/types";
 import MealDetail from "./screens/MealDetail";
+import { createDrawerNavigator } from "@react-navigation/drawer";
+import FavouritesScreen from "./screens/FavouritesScreen";
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 
 const Stack = createNativeStackNavigator<RootStackNavigatorParamList>();
+const Drawer = createDrawerNavigator();
+
+const DrawerNavigator = () => {
+  return (
+    <Drawer.Navigator
+      screenOptions={{
+        headerTintColor: "white",
+        headerTitleAlign: "center",
+        headerStyle: {
+          backgroundColor: "brown",
+        },
+        sceneContainerStyle: {
+          backgroundColor: "#ffffff",
+        },
+        drawerContentStyle: {
+          backgroundColor: "brown",
+        },
+        drawerActiveTintColor: "black",
+        drawerInactiveTintColor: "white",
+        drawerActiveBackgroundColor: "#FFE4C4",
+      }}
+    >
+      <Drawer.Screen
+        name="Categories"
+        component={CategoriesScreen}
+        options={{
+          drawerIcon: ({ size, color }) => (
+            <MaterialIcons name="category" size={size} color={color} />
+          ),
+        }}
+      />
+      <Drawer.Screen
+        name="Favourites"
+        component={FavouritesScreen}
+        options={{
+          drawerIcon: ({ size, color }) => (
+            <MaterialIcons name="favorite" size={size} color={color} />
+          ),
+        }}
+      />
+    </Drawer.Navigator>
+  );
+};
 export default function App() {
   return (
     // <View style={styles.container}>
@@ -25,10 +71,11 @@ export default function App() {
         }}
       >
         <Stack.Screen
-          name="Categories"
-          component={CategoriesScreen}
+          name="Home"
+          component={DrawerNavigator}
           options={{
-            title: "All Categories",
+            // title: "All Categories",
+            headerShown: false,
           }}
         />
         <Stack.Screen

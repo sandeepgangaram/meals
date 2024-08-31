@@ -1,7 +1,7 @@
 import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 export type RootStackNavigatorParamList = {
-  Categories: undefined;
+  Home: undefined;
   Overview: {
     categoryId: string;
   };

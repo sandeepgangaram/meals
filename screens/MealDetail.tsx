@@ -21,7 +21,7 @@ const MealDetail = ({ route, navigation }: Props) => {
   const mealId = route?.params.mealId;
 
   const tapHandler = () => {
-    navigation.navigate("Categories");
+    navigation.navigate("Home");
   };
   const meal = MEALS.find((meal) => meal.id === mealId);
   useLayoutEffect(() => {
